@@ -13,7 +13,7 @@ export default function HomeScreen() {
         contentFit="cover"
       />
 
-      <Text style={styles.name}>Therese Russel Arocha</Text>
+      <Text style={styles.name}>Therese Russell Arocha</Text>
       <Text style={styles.course}>A302 - CS126</Text>
       <Text style={styles.bio}>
         A Multimedia student who incorporates personal style in my projects, and is willing to explore more creative mediums
