@@ -22,6 +22,8 @@ export default function HomeScreen() {
   );
 }
 
+// Add borders, name, photo, and bio to the home screen.
+
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
