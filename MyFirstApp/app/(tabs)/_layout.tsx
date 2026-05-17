@@ -1,7 +1,11 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { Image } from 'expo-image';
 
 export default function HomeScreen() {
+  const [name, setName] = useState('');
+  const [count, setCount] = useState(0);
+
   return (
     <View style={styles.screen}>
       <View style={styles.cornerTopLeft} />
@@ -13,16 +17,39 @@ export default function HomeScreen() {
         contentFit="cover"
       />
 
-      <Text style={styles.name}>Therese Russell Arocha</Text>
-      <Text style={styles.course}>A302 - CS126</Text>
-      <Text style={styles.bio}>
-        A Multimedia student who incorporates personal style in my projects, and is willing to explore more creative mediums
-      </Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter your name"
+        value={name}
+        onChangeText={setName}
+      />
+
+      {name !== '' && (
+        <Text style={styles.greeting}>Hello, {name}!</Text>
+      )}
+
+      {name !== '' && (
+        <Text style={styles.tapMessage}>
+          {name}, you tapped {count} times!
+        </Text>
+      )}
+
+      <View style={styles.card}>
+        <TouchableOpacity onPress={() => setCount(count + 1)}>
+          <Text style={styles.btnText}>+</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => setCount(count > 0 ? count - 1 : 0)}>
+          <Text style={styles.btnText}>-</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => setCount(0)}>
+          <Text style={styles.resetText}>RESET</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
-
-// Add borders, name, photo, and bio to the home screen.
 
 const styles = StyleSheet.create({
   screen: {
@@ -58,21 +85,43 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     marginBottom: 20,
   },
-  name: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 8,
-    color: '#1a73c9',
-  },
-  course: {
-    fontSize: 18,
-    color: '#4DA6E8',
+  input: {
+    width: '90%',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    backgroundColor: '#fff',
+    padding: 10,
     marginBottom: 12,
+    fontSize: 16,
   },
-  bio: {
+  greeting: {
+    fontSize: 18,
+    color: '#333',
+    marginBottom: 4,
+  },
+  tapMessage: {
     fontSize: 14,
-    textAlign: 'center',
-    color: '#4DA6E8',
-    paddingHorizontal: 20,
+    color: '#555',
+    marginBottom: 16,
+  },
+  card: {
+    width: '90%',
+    backgroundColor: '#4DA6E8',
+    borderRadius: 4,
+    paddingVertical: 10,
+    alignItems: 'center',
+    gap: 4,
+  },
+  btnText: {
+    fontSize: 22,
+    color: '#fff',
+    paddingVertical: 4,
+  },
+  resetText: {
+    fontSize: 14,
+    color: '#fff',
+    fontWeight: 'bold',
+    paddingVertical: 4,
+    letterSpacing: 1,
   },
 });
