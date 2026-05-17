@@ -1,35 +1,76 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Image } from 'expo-image';
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+export default function HomeScreen() {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
+    <View style={styles.screen}>
+      <View style={styles.cornerTopLeft} />
+      <View style={styles.cornerBottomRight} />
+
+      <Image
+        source={require('../../assets/images/profile.jpg')}
+        style={styles.photo}
+        contentFit="cover"
       />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
+
+      <Text style={styles.name}>Therese Russel Arocha</Text>
+      <Text style={styles.course}>A302 - CS126</Text>
+      <Text style={styles.bio}>
+        A Multimedia student who incorporates personal style in my projects, and is willing to explore more creative mediums
+      </Text>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f2f2f2',
+    padding: 20,
+  },
+  cornerTopLeft: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    width: 80,
+    height: 80,
+    borderTopWidth: 3,
+    borderLeftWidth: 3,
+    borderColor: '#4DA6E8',
+  },
+  cornerBottomRight: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    width: 80,
+    height: 80,
+    borderBottomWidth: 3,
+    borderRightWidth: 3,
+    borderColor: '#4DA6E8',
+  },
+  photo: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    marginBottom: 20,
+  },
+  name: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    color: '#1a73c9',
+  },
+  course: {
+    fontSize: 18,
+    color: '#4DA6E8',
+    marginBottom: 12,
+  },
+  bio: {
+    fontSize: 14,
+    textAlign: 'center',
+    color: '#4DA6E8',
+    paddingHorizontal: 20,
+  },
+});
